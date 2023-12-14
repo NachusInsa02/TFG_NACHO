@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Tarjeta</title>
+    <link rel="stylesheet" href="../assets/añadir_tarjeta/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="../assets/añadir_tarjeta/css/styles.css">
+</head>
+
+<body>
+    <!-- CONTENEDOR -->
+    <div style="width: 100%; height: 100vh; display: flex; min-width: 375px;">
+
+        <!-- DIV IZQUIERDA -->
+        <div style="width: 75px; height: 100vh;">
+
+            <!-- MENU LATERAL -->
+            <div class="bg-body shadow d-flex flex-column flex-shrink-0 top-0 bottom-0"
+                style="width: 4.5rem; height: 100vh;"><a
+                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="/"
+                    title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only"><i
+                        class="fa fa-money" style="font-size: 25px;"></i><span
+                        class="visually-hidden">Icon-only</span></a>
+                <ul class="nav nav-pills flex-column text-center nav-flush mb-auto">
+                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="#"
+                            aria-current="page"><i class="icon-credit-card"></i></a></li>
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="añadirTarjeta.html"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                                fill="none">
+                                <path
+                                    d="M12 4C11.4477 4 11 4.44772 11 5V11H5C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H11V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13H19C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11H13V5C13 4.44772 12.5523 4 12 4Z"
+                                    fill="currentColor"></path>
+                            </svg></a></li>
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                                viewBox="0 0 16 16" class="bi bi-credit-card">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z">
+                                </path>
+                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z">
+                                </path>
+                            </svg></a></li>
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                                fill="none">
+                                <path d="M7 18H17V16H7V18Z" fill="currentColor"></path>
+                                <path d="M17 14H7V12H17V14Z" fill="currentColor"></path>
+                                <path d="M7 10H11V8H7V10Z" fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6 2C4.34315 2 3 3.34315 3 5V19C3 20.6569 4.34315 22 6 22H18C19.6569 22 21 20.6569 21 19V9C21 5.13401 17.866 2 14 2H6ZM6 4H13V9H19V19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V5C5 4.44772 5.44772 4 6 4ZM15 4.10002C16.6113 4.4271 17.9413 5.52906 18.584 7H15V4.10002Z"
+                                    fill="currentColor"></path>
+                            </svg></a></li>
+                </ul>
+                <div class="dropdown p-3 border-top"><a
+                        class="dropdown-toggle link-body-emphasis d-flex align-items-center text-decoration-none"
+                        aria-expanded="false" data-bs-toggle="dropdown" role="button"><img class="rounded-circle" alt=""
+                            width="32" height="32" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
+                            style="object-fit: cover;"></a>
+                    <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a
+                            class="dropdown-item" href="#">Perfil</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"
+                            onclick="cerrar_sesion()">Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DIV DE LA DERECHA -->
+        <div
+            style="flex-grow: 1; height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; min-height: 600px;">
+            <h1
+                style="position: absolute; top: 3%; left: 50%; transform: translate(-50%, -50%); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 3px;">
+                Añadir Tarjeta</h1>
+            <form id="formulario_tarjeta" class="text-center" method="post">
+                <div class="mb-3">
+                    <input class="form-control" id="numero_tarjeta" type="text" name="numero_tarjeta"
+                        placeholder="Nº Tarjeta">
+                    <span id="errorNumeroTarjeta" style="color: red; font-size: 12px;"></span>
+                    <input class="form-control" id="titular" type="text" name="titular" placeholder="Titular"
+                        style="margin-top: 10px;">
+                    <span id="errorTitular" style="color: red; font-size: 12px;"></span>
+                    <input class="form-control" id="fechaCaducidad" type="text" name="fecha_caducidad"
+                        placeholder="Fecha Caducidad" style="margin-top: 10px;">
+                    <span id="errorFechaCaducidad" style="color: red; font-size: 12px;"></span>
+                    <input class="form-control" id="cvv" type="text" name="cvv" placeholder="CVV"
+                        style="margin-top: 10px;">
+                    <span id="errorCVV" style="color: red; font-size: 12px;"></span>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary d-block w-100" type="submit">Añadir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Verifico si la sesión está activa. Si lo está me quedo en la página, sino se te echa de la aplicación para que puedas volver a iniciar sesión.
+        var formData1 = new FormData();
+        var token1 = localStorage.getItem("token");
+        formData1.append("token", token1);
+        fetch("../php/verificar_sesion.php", {
+            method: "POST",
+            body: formData1
+        })
+        .then(response => response.json())
+        .then(resultado => {
+            if (resultado["status"] == "ERROR") {
+                //alert("Sesion Caducada");
+                localStorage.removeItem("token");
+                window.location.replace("login.html");
+            }
+        });
+        // Añador evento "submit" al formulario para que cuando se envie se ejecute lo que hay dentro de la función.
+        const form = document.getElementById("formulario_tarjeta");
+        form.addEventListener("submit", function (event) {
+            // Anulo recarga.
+            event.preventDefault();
+            let esValidoElFormulario = true;
+
+            var formData2 = new FormData();
+            var token2 = localStorage.getItem("token");
+            formData2.append("token", token2);
+            fetch("../php/verificar_sesion.php", {
+                method: "POST",
+                body: formData2
+            })
+            .then(response => response.json())
+            .then(resultado => {
+                if (resultado["status"] == "ERROR") {
+                    //alert("Sesion Caducada");
+                    localStorage.removeItem("token");
+                    window.location.replace("login.html");
+                } else {
+                    // VALIDO NUMERO TARJETA
+                    var numero_tarjeta = (document.getElementById("numero_tarjeta").value).trim();
+                    var patron_numero_tarjeta = /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/;
+
+                    if (patron_numero_tarjeta.test(numero_tarjeta) == false) {
+                        document.getElementById("errorNumeroTarjeta").innerHTML = "El formato debe ser: XXXX XXXX XXXX XXXX";
+                        esValidoElFormulario = false;
+                    } else {
+                        document.getElementById("errorNumeroTarjeta").innerHTML = "";
+                    }
+
+                    // VALIDAR TITULAR
+                    var titular = (document.getElementById("titular").value).trim();
+                    var patron_titular = /^[A-ZÀ-ÿ\u00f1\u00d1]+\s[A-ZÀ-ÿ\u00f1\u00d1]+\s[A-ZÀ-ÿ\u00f1\u00d1]+$/;
+
+                    if (patron_titular.test(titular) == false) {
+                        document.getElementById("errorTitular").innerHTML = "El formato debe ser: NOMBRE APELLIDO1 APELLIDO2";
+                        esValidoElFormulario = false;
+                    } else {
+                        document.getElementById("errorTitular").innerHTML = "";
+                    }
+
+                    // VALIDAR FECHA CADUCIDAD
+                    var fecha_caducidad = (document.getElementById("fechaCaducidad").value).trim();
+                    var patron_fecha_caducidad = /^(0[1-9]|1[0-2])\/\d{2}$/;
+
+                    if (patron_fecha_caducidad.test(fecha_caducidad) == false) {
+                        document.getElementById("errorFechaCaducidad").innerHTML = "El formato debe ser: XX/XX";
+                        esValidoElFormulario = false;
+                    } else {
+                        document.getElementById("errorFechaCaducidad").innerHTML = "";
+                    }
+
+                    // VALIDAR CVV
+                    var cvv = (document.getElementById("cvv").value).trim();
+                    var patron_cvv = /^\d{3}$/;
+
+                    if (patron_cvv.test(cvv) == false) {
+                        document.getElementById("errorCVV").innerHTML = "El formato debe ser: XXX";
+                        esValidoElFormulario = false;
+                    } else {
+                        document.getElementById("errorCVV").innerHTML = "";
+                    }
+                    // Si todos los datos introducidos cumplen con los requisitos se interactua con la api de PHP sino nada.
+                    if (esValidoElFormulario) {
+                        //console.log("Envio los datos al PHP");
+                        var formData3 = new FormData();
+                        var token3 = localStorage.getItem("token");
+                        formData3.append("token", token3);
+                        fetch("../php/verificar_sesion.php", {
+                            method: "POST",
+                            body: formData3
+                        }) // Falta acabar.
+                    }
+                }
+            });
+        });
+
+        function cerrar_sesion() {
+            localStorage.removeItem("token");
+            window.location.replace("login.html");
+        }
+
+    </script>
+    <script src="../assets/añadir_tarjeta/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

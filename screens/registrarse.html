@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="../assets/registrarse/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/registrarse/css/Login-Form-Basic-icons.css">
+</head>
+
+<body>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2>Registro</h2>
+                    <p class="w-lg-50">Introduzca sus datos para crear su cuenta.</p>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-xl-4">
+                    <div class="card mb-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <a id="btnAtras" class="btn btn-primary" href="login.html" >Atrás</a>
+                            <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"></path>
+                                </svg></div>
+                            <form class="text-center" method="post" id="formulario_registrarse">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre" >
+                                        <span id="errorNombre" style="color: red; font-size: 12px;"></span>
+                                    <input class="form-control" type="text" name="apellidos" id="apellidos" placeholder="Apellido" style="margin-top: 10px;">
+                                        <span id="errorApellido" style="color: red; font-size: 12px;"></span>
+                                    <input maxlength="10" class="form-control" type="text" name="dni" id="dni" placeholder="Dni" style="margin-top: 10px;" >
+                                        <span id="errorDni" style="color: red; font-size: 12px;"></span>
+                                    <input class="form-control" type="email" name="email" id="email" placeholder="Email" style="margin-top: 10px;" >
+                                        <span id="errorEmail" style="color: red; font-size: 12px;"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" type="password" name="password" id="password" placeholder="Password" style="margin-top: -10px;" >
+                                        <span id="errorContraseña" style="color: red; font-size: 12px;"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-primary d-block w-100" type="submit">Registrarse</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+
+        if (localStorage.getItem("token")){
+            window.location.replace("mis_tarjetas.html");
+        } 
+
+        function prevenirEspacios(event) {
+            if(event.key == ' '){
+                event.preventDefault();
+            }
+        }
+
+        function eliminarEspacios(event) {
+            event.target.value = event.target.value.replace(/\s/g, '');
+        }
+
+        const nombre = document.getElementById("nombre");
+        nombre.addEventListener("keydown", prevenirEspacios);
+        nombre.addEventListener("change", eliminarEspacios);
+        const apellido = document.getElementById("apellidos");
+        apellido.addEventListener("keydown", prevenirEspacios);
+        apellido.addEventListener("change", eliminarEspacios);
+        const dni = document.getElementById("dni");
+        dni.addEventListener("keydown", prevenirEspacios);
+        dni.addEventListener("change", eliminarEspacios);
+        const email = document.getElementById("email");
+        email.addEventListener("keydown",prevenirEspacios);
+        email.addEventListener("change", eliminarEspacios);
+        const contraseña = document.getElementById("password");
+        contraseña.addEventListener("keydown", prevenirEspacios);
+        contraseña.addEventListener("change", eliminarEspacios);
+
+        const form = document.getElementById("formulario_registrarse");
+        form.addEventListener("submit", function(event){
+            event.preventDefault();
+            let esValidoElFormulario = true;
+            
+            // VALIDO NOMBRE
+            var nombre = (document.getElementById("nombre").value).trim();
+            var patron_nombre = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+            
+           if(nombre.length < 3){
+                document.getElementById("errorNombre").innerHTML = "El nombre es obligatorio y tiene que tener mínimo 3 caracteres";
+                esValidoElFormulario= false;
+            }else if(nombre.length > 20){
+                document.getElementById("errorNombre").innerHTML = "El nombre es obligatorio y no puede tener más de 20 caracteres";
+                esValidoElFormulario= false;
+            }else if(patron_nombre.test(nombre) == false){
+                document.getElementById("errorNombre").innerHTML = "El nombre solo debe contener letras";
+                esValidoElFormulario= false;
+            }
+            else {
+                document.getElementById("errorNombre").innerHTML = ""; 
+            }
+
+            // VALIDO APELLIDO
+            var apellidos = (document.getElementById("apellidos").value).trim();
+            var patron_apellido = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+
+            if (apellidos.length < 3){
+                document.getElementById("errorApellido").innerHTML = "El apellido es obligatorio y tiene que tener mínimo 3 caracteres";
+                esValidoElFormulario= false;
+            }else if(apellidos.length > 40){
+                document.getElementById("errorApellido").innerHTML = "El apellido es obligatorio y no puede tener más de 40 caracteres";
+                esValidoElFormulario= false;
+            }else if(patron_apellido.test(apellidos) == false){
+                document.getElementById("errorApellido").innerHTML = "El apellido solo debe contener letras";
+                esValidoElFormulario= false;
+            }
+            else{
+                document.getElementById("errorApellido").innerHTML = "";
+            }
+
+            // VALIDO DNI
+            var dni = (document.getElementById("dni").value).trim();
+            var patron_dni = /^(\d{8})([A-Z])$/;
+
+            if (patron_dni.test(dni) == false){
+                document.getElementById("errorDni").innerHTML = "Introduce un DNI válido(8 numeros y una letra Mayúscula)";
+                esValidoElFormulario= false;
+            }else{
+                document.getElementById("errorDni").innerHTML = "";
+            }
+
+            // VALIDO EMAIL
+            var email = (document.getElementById("email").value).trim();
+            var patron_email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+            if (patron_email.test(email) == false){
+                document.getElementById("errorEmail").innerHTML = "Introduce un Email valido";
+                esValidoElFormulario= false;
+            }else{
+                document.getElementById("errorEmail").innerHTML = "";
+            }
+            //VALIDO CONTRASEÑA
+            var contraseña = (document.getElementById("password").value).trim();
+            var patron_contraseña = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+
+            if (patron_contraseña.test(contraseña) == false){
+                document.getElementById("errorContraseña").innerHTML = "La contraseña debe tener entre 8 y 15 caracteres, un número, una minúscula , una mayúscula, un caracter especial y no debe tener espacios en blanco";
+                esValidoElFormulario= false;
+            }else{
+                document.getElementById("errorContraseña").innerHTML = "";
+            }
+
+            if(esValidoElFormulario){
+                console.log("ENVIO LA INFO A PHP SQL Y MENSAJE DE ACTUALIZADO EL PERFIL OK");  
+                var formData = new FormData();
+                formData.append("nombre",nombre);
+                formData.append("apellidos",apellidos);
+                formData.append("dni",dni);
+                formData.append("email",email);
+                formData.append("password",contraseña);
+                fetch("../php/registrarse.php", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then (resultado => {
+                    if (resultado["status"] == "ERROR"){
+                        alert("Ya existe un usuario con ese email");
+                    }else{
+                        alert("Usuario registrado correctamente");
+                    }
+                })
+            }
+        });
+    </script>
+    <script src="../assets/registrarse/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
