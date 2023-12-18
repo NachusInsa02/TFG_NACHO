@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
-
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -10,6 +7,7 @@
     <link rel="stylesheet" href="../assets/login/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/login/css/Login-Form-Basic-icons.css">
     <style>
+
         .modal {
             display: none;
             position: fixed;
@@ -57,9 +55,9 @@
             text-decoration: none;
             cursor: pointer;
         }
+
     </style>
 </head>
-
 <body>
     <section class="position-relative py-4 py-xl-5">
         <div class="container">
@@ -104,20 +102,12 @@
     </div>
     <script>
 
+        // Si existe el token redirecciono a el panel de mis tarjetas.
        if (localStorage.getItem("token")){
             window.location.replace("mis_tarjetas.html");
         }
 
-        function prevenirEspacios(event) {
-            if(event.key == ' '){
-                event.preventDefault();
-            }
-        }
-
-        function eliminarEspacios(event) {
-            event.target.value = event.target.value.replace(/\s/g, '');
-        }
-
+        // Añadir eventos a cada uno de los elementos HTML.
         const email = document.getElementById("email");
         email.addEventListener("keydown", prevenirEspacios);
         email.addEventListener("change", eliminarEspacios);
@@ -125,8 +115,11 @@
         contraseña.addEventListener("keydown", prevenirEspacios);
         contraseña.addEventListener("change", eliminarEspacios);
 
+        // Añado evento "submit" al formulario para que cuando se envie se ejecute lo que hay dentro de la función.
         const form = document.getElementById("formulario_login");
         form.addEventListener("submit", function(event){
+
+            // Evito recarga.
             event.preventDefault();
             let esValidoElFormulario = true;
             
@@ -164,6 +157,7 @@
                 .then(response => response.json())
                 .then (resultado => {
                     if (resultado["status"] == "ERROR"){
+                        // Muestro Modal.
                         document.getElementById("contenidoModal").innerHTML = "Usuario o contraseña Incorrectos";
                         var modal = document.getElementById("miModal");
                         modal.style.display = "block";
@@ -176,14 +170,27 @@
                                 modal.style.display = "none";
                             }
                         }
-                        //alert("Usuario o contraseña Incorrectos");
                     }else{
                         localStorage.setItem("token",resultado["token"]);
                         window.location.replace("mis_tarjetas.html");
                     }
                 })
             }
+
         });
+
+        // Función para evitar espacios.
+        function prevenirEspacios(event) {
+            if(event.key == ' '){
+                event.preventDefault();
+            }
+        }
+
+        // Función para evitar espacios.
+        function eliminarEspacios(event) {
+            event.target.value = event.target.value.replace(/\s/g, '');
+        }
+
     </script>
     <script src="../assets/login/bootstrap/js/bootstrap.min.js"></script>
 </body>

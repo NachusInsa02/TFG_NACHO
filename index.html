@@ -7,14 +7,14 @@
 </head>
 <body>
     <script>
-        //localStorage.setItem("token","hola");
-        //localStorage.removeItem("token");
+        
+        // Si existe un token quiere decir que hay una sesión iniciada y por tanto redirigo a el panel de mis tarjetas. Sino muestro el login.
         if (localStorage.getItem("token")){
             window.location.replace("screens/mis_tarjetas.html");
-            //var myToken = localStorage.getItem("token");
         }else{
             window.location.replace("screens/login.html");
         }
+
     </script>
 </body>
 </html>

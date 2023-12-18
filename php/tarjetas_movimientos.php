@@ -1,20 +1,27 @@
 <?php
     require "config.php";   
 
+    // Creo objeto y recojo las variables necesarias.
     $objeto_tarjetas_movimientos = new TarjetasMovimientos(DIRECCION,USUARIO,CONTRASEÑA,BD);
     $token = $_POST["token"];
 
+    // Lógica del PHP.
     $id_usuario = $objeto_tarjetas_movimientos->rescatar_id_usuario($token);
     $array_numero_tarjetas = $objeto_tarjetas_movimientos->mostrar_tarjetas_select($id_usuario);
 
+    // Devuelvo el JSON con lo que corresponda.
     echo json_encode($array_numero_tarjetas);
 
+    // Defino la clase.
     class TarjetasMovimientos{
+
+        // Variables de Clase.
         private $direccion;
         private $usuario;
         private $contraseña;
         private $bd;
 
+        // Defino Constructor.
         public function __construct($direccion,$usuario,$contraseña,$bd){
             $this->direccion = $direccion;
             $this->usuario = $usuario;
@@ -22,6 +29,7 @@
             $this->bd= $bd;
         }
 
+        // Función que rescata el id de usuario para usarlo en otras funciones.
         public function rescatar_id_usuario($token){
             @ $conexion = new mysqli($this->direccion,$this->usuario,$this->contraseña,$this->bd);
             $consulta = "SELECT id_usuarios FROM sesiones WHERE token = '$token'";
@@ -31,6 +39,7 @@
             return $id_usuario;
         }
 
+        // Funcion que devuelve los ids de cada tarjeta y su numero de tarjeta formateado.
         public function mostrar_tarjetas_select($id_usuario){
             @ $conexion = new mysqli($this->direccion,$this->usuario,$this->contraseña,$this->bd);
             $array = [];
@@ -43,5 +52,7 @@
             }
             return $array;
         }
+
     }
+    
 ?>

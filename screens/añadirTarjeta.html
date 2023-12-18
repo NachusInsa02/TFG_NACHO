@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +8,58 @@
     <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="../assets/añadir_tarjeta/css/styles.css">
-</head>
+    <style>
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 140%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation-name: animarEntrada;
+            animation-duration: 0.4s;
+        }
+
+        .modal-contenido {
+            background-color: #fefefe;
+            margin: 75px auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        @keyframes animarEntrada {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        .cerrar {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .cerrar:hover,
+        .cerrar:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
 <body>
     <!-- CONTENEDOR -->
     <div style="width: 100%; height: 100vh; display: flex; min-width: 375px;">
@@ -21,12 +70,12 @@
             <!-- MENU LATERAL -->
             <div class="bg-body shadow d-flex flex-column flex-shrink-0 top-0 bottom-0"
                 style="width: 4.5rem; height: 100vh;"><a
-                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="/"
+                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="#"
                     title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only"><i
                         class="fa fa-money" style="font-size: 25px;"></i><span
                         class="visually-hidden">Icon-only</span></a>
                 <ul class="nav nav-pills flex-column text-center nav-flush mb-auto">
-                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="#"
+                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="mis_tarjetas.html"
                             aria-current="page"><i class="icon-credit-card"></i></a></li>
                     <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="añadirTarjeta.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
@@ -35,7 +84,7 @@
                                     d="M12 4C11.4477 4 11 4.44772 11 5V11H5C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H11V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13H19C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11H13V5C13 4.44772 12.5523 4 12 4Z"
                                     fill="currentColor"></path>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="movimientos.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-credit-card">
                                 <path
@@ -44,7 +93,7 @@
                                 <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z">
                                 </path>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="contratos.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                 fill="none">
                                 <path d="M7 18H17V16H7V18Z" fill="currentColor"></path>
@@ -61,9 +110,8 @@
                             width="32" height="32" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
                             style="object-fit: cover;"></a>
                     <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a
-                            class="dropdown-item" href="#">Perfil</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"
-                            onclick="cerrar_sesion()">Cerrar Sesión</a>
+                            class="dropdown-item" href="perfil.html">Perfil</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" id="elemento_cerrar_sesion" href="#">Cerrar Sesión</a>
                     </div>
                 </div>
             </div>
@@ -94,8 +142,15 @@
                 </div>
             </form>
         </div>
+        <div id="miModal" class="modal">
+            <div class="modal-contenido">
+                <span class="cerrar">&times;</span>
+                <p id="contenidoModal"></p>
+            </div>
+        </div>
     </div>
     <script>
+
         // Verifico si la sesión está activa. Si lo está me quedo en la página, sino se te echa de la aplicación para que puedas volver a iniciar sesión.
         var formData1 = new FormData();
         var token1 = localStorage.getItem("token");
@@ -107,12 +162,30 @@
         .then(response => response.json())
         .then(resultado => {
             if (resultado["status"] == "ERROR") {
-                //alert("Sesion Caducada");
                 localStorage.removeItem("token");
                 window.location.replace("login.html");
             }
         });
-        // Añador evento "submit" al formulario para que cuando se envie se ejecute lo que hay dentro de la función.
+
+        // Evento que comprueba sesión en las páginas cacheadas y no cacheadas al querer interactuar con la aplicación.
+        window.addEventListener("click", function() {
+            var token5 = localStorage.getItem("token");
+            var formData5 = new FormData();
+            formData5.append("token", token5);
+            fetch("../php/verificar_sesion.php", {
+                method: "POST",
+                body: formData5
+            })
+            .then(response => response.json())
+            .then(resultado => {
+                if (resultado["status"] == "ERROR") {
+                    localStorage.removeItem("token");
+                    window.location.replace("login.html");
+                }
+            });
+        });
+
+        // Añado evento "submit" al formulario para que cuando se envie se ejecute lo que hay dentro de la función.
         const form = document.getElementById("formulario_tarjeta");
         form.addEventListener("submit", function (event) {
             // Anulo recarga.
@@ -129,7 +202,6 @@
             .then(response => response.json())
             .then(resultado => {
                 if (resultado["status"] == "ERROR") {
-                    //alert("Sesion Caducada");
                     localStorage.removeItem("token");
                     window.location.replace("login.html");
                 } else {
@@ -178,22 +250,93 @@
                     }
                     // Si todos los datos introducidos cumplen con los requisitos se interactua con la api de PHP sino nada.
                     if (esValidoElFormulario) {
-                        //console.log("Envio los datos al PHP");
+                        var numero_tarjeta_formateada = ocultarNumerosTarjetaConEspacios((numero_tarjeta.replace(/ /g, "")));
                         var formData3 = new FormData();
                         var token3 = localStorage.getItem("token");
                         formData3.append("token", token3);
-                        fetch("../php/verificar_sesion.php", {
+                        formData3.append("numero_tarjeta", numero_tarjeta);
+                        formData3.append("titular", titular);
+                        formData3.append("fecha_caducidad", fecha_caducidad);
+                        formData3.append("cvv", cvv);
+                        formData3.append("numero_tarjeta_formateada",numero_tarjeta_formateada);
+                        fetch("../php/añadir_tarjeta.php", {
                             method: "POST",
                             body: formData3
-                        }) // Falta acabar.
+                        })
+                        .then(response => response.json())
+                        .then(resultado => {
+                            if (resultado["status"] == "ERROR1") {
+                                // Muestro Modal.
+                                document.getElementById("contenidoModal").innerHTML = "No puede añadir la tarjeta porque no está dada de alta en su cuenta";
+                                var modal = document.getElementById("miModal");
+                                modal.style.display = "block";
+                                var btnCerrar = document.getElementsByClassName("cerrar")[0];
+                                btnCerrar.onclick = function () {
+                                    modal.style.display = "none";
+                                }
+                                window.onclick = function (event) {
+                                    if (event.target == modal) {
+                                        modal.style.display = "none";
+                                    }
+                                }
+                            }else if (resultado["status"] == "ERROR2"){
+                                // Muestro Modal.
+                                document.getElementById("contenidoModal").innerHTML = "No puede añadir la tarjeta porque ya se encuentra en el panel Mis Tarjetas";
+                                var modal = document.getElementById("miModal");
+                                modal.style.display = "block";
+                                var btnCerrar = document.getElementsByClassName("cerrar")[0];
+                                btnCerrar.onclick = function () {
+                                    modal.style.display = "none";
+                                }
+                                window.onclick = function (event) {
+                                    if (event.target == modal) {
+                                        modal.style.display = "none";
+                                    }
+                                }
+                            }else{
+                                // Muestro Modal.
+                                document.getElementById("contenidoModal").innerHTML = "Tarjeta añadida con exito";
+                                var modal = document.getElementById("miModal");
+                                modal.style.display = "block";
+                                var btnCerrar = document.getElementsByClassName("cerrar")[0];
+                                btnCerrar.onclick = function () {
+                                    modal.style.display = "none";
+                                }
+                                window.onclick = function (event) {
+                                    if (event.target == modal) {
+                                        modal.style.display = "none";
+                                    }
+                                }
+                            }
+                        });
                     }
                 }
             });
         });
 
-        function cerrar_sesion() {
+        // Añadir evento "click "al elemento HTML cuyo id es "elemento_cerrar_sesion". Una vez se hace click, se ejecuta la función que modifica el estado de la sesión en la BD
+        // de 0(Sesión Activa) a 1 (Sesión Caducada). Además se elimina el token del localStorage y se redirige a la pagina del Login.
+        var elemento_cerrar_sesion = document.getElementById("elemento_cerrar_sesion");
+        elemento_cerrar_sesion.addEventListener("click", function (event) {
+
+            var token4 = localStorage.getItem("token");
+            var formData4 = new FormData();
+            formData4.append("token", token4);
+            fetch("../php/cerrar_sesion.php", {
+                method: "POST",
+                body: formData4
+            });
             localStorage.removeItem("token");
             window.location.replace("login.html");
+
+        });
+
+        // Funcion encargada de ocultar los numeros de la tarjeta que se le pasa por parámetro excepto sus cuatro últimos dígitos. Espacios cada cuatro dígitos.
+        function ocultarNumerosTarjetaConEspacios(tarjeta) {
+            const longitud = tarjeta.length;
+            const numerosOcultos = 'X'.repeat(longitud - 4) + tarjeta.slice(-4);
+            const tarjetaFormateada = numerosOcultos.replace(/(.{4})/g, '$1 ');
+            return tarjetaFormateada.trim();
         }
 
     </script>

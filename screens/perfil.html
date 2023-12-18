@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/css/styles.css">
+    <link rel="stylesheet" href="../assets/perfil/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/perfil/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/perfil/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="../assets/perfil/css/styles.css">
     <style>
+
         .modal {
             display: none;
             position: fixed;
@@ -57,9 +57,9 @@
             text-decoration: none;
             cursor: pointer;
         }
+        
     </style>
 </head>
-
 <body>
     <!-- CONTENEDOR -->
     <div style="width: 100%; height: 100vh; display: flex; min-width: 375px;">
@@ -68,12 +68,12 @@
             <!-- MENU LATERAL -->
             <div class="bg-body shadow d-flex flex-column flex-shrink-0 top-0 bottom-0"
                 style="width: 4.5rem; height: 100vh;"><a
-                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="/"
+                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="#"
                     title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only"><i
                         class="fa fa-money" style="font-size: 25px;"></i><span
                         class="visually-hidden">Icon-only</span></a>
                 <ul class="nav nav-pills flex-column text-center nav-flush mb-auto">
-                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="#"
+                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="mis_tarjetas.html"
                             aria-current="page"><i class="icon-credit-card"></i></a></li>
                     <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="añadirTarjeta.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
@@ -82,7 +82,7 @@
                                     d="M12 4C11.4477 4 11 4.44772 11 5V11H5C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H11V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13H19C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11H13V5C13 4.44772 12.5523 4 12 4Z"
                                     fill="currentColor"></path>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="movimientos.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-credit-card">
                                 <path
@@ -91,7 +91,7 @@
                                 <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z">
                                 </path>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="contratos.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                 fill="none">
                                 <path d="M7 18H17V16H7V18Z" fill="currentColor"></path>
@@ -108,9 +108,8 @@
                             width="32" height="32" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
                             style="object-fit: cover;"></a>
                     <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a
-                            class="dropdown-item" href="#">Perfil</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"
-                            onclick="cerrar_sesion()">Cerrar Sesión</a>
+                            class="dropdown-item" href="perfil.html">Perfil</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" id="elemento_cerrar_sesion" href="#">Cerrar Sesión</a>
                     </div>
                 </div>
             </div>
@@ -137,7 +136,6 @@
                 Mi Perfil</h1>
             <form class="text-center" id="form" method="post">
                 <div class="mb-3">
-                    <!-- Impido poner caracteres especiales con validadInput -->
                     <input id="nombre" class="form-control" name="nombre" placeholder="Nombre">
                     <span id="errorNombre" style="color: red; font-size: 12px;"></span>
                     <input id="apellido" class="form-control" name="apellidos" placeholder="Apellidos"
@@ -145,13 +143,6 @@
                     <span id="errorApellido" style="color: red; font-size: 12px;"></span>
                     <input id="dni" class="form-control" name="dni" placeholder="Dni" style="margin-top: 10px;">
                     <span id="errorDni" style="color: red; font-size: 12px;"></span>
-                    <input id="contraseña" type="password" class="form-control" name="password" placeholder="Contraseña"
-                        style="margin-top: 10px;">
-                    <span id="errorContraseña" style="color: red; font-size: 12px;"></span>
-                    <!-- 
-                        <input type="file" id="imageInput" class="form-control-file mt-3">
-                        <button class="btn btn-primary mt-2" onclick="uploadImage()">Subir Imagen</button> -->
-
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-primary d-block w-100">Guardar</button>
@@ -167,6 +158,7 @@
     </div>
     <script>
 
+        // Verifico si la sesión está activa. Si lo está me quedo en la página, sino se te echa de la aplicación para que puedas volver a iniciar sesión.
         var formData1 = new FormData();
         var token1 = localStorage.getItem("token");
         formData1.append("token", token1);
@@ -177,7 +169,6 @@
         .then(response => response.json())
         .then(resultado => {
             if (resultado["status"] == "ERROR") {
-                //alert("Sesion Caducada");
                 localStorage.removeItem("token");
                 window.location.replace("login.html");
             } else {
@@ -193,21 +184,11 @@
                     document.getElementById("nombre").value = resultado["nombre"];
                     document.getElementById("apellido").value = resultado["apellido"];
                     document.getElementById("dni").value = resultado["dni"];
-                    document.getElementById("contraseña").value = resultado["contraseña"];
                 })
             }
         });
 
-        function prevenirEspacios(event) {
-            if (event.key == ' ') {
-                event.preventDefault();
-            }
-        }
-
-        function eliminarEspacios(event) {
-            event.target.value = event.target.value.replace(/\s/g, '');
-        }
-
+        // Añado con DOM eventos a elementos HTML.
         const nombre = document.getElementById("nombre");
         nombre.addEventListener("keydown", prevenirEspacios);
         nombre.addEventListener("change", eliminarEspacios);
@@ -217,15 +198,36 @@
         const dni = document.getElementById("dni");
         dni.addEventListener("keydown", prevenirEspacios);
         dni.addEventListener("change", eliminarEspacios);
-        const contraseña = document.getElementById("contraseña");
-        contraseña.addEventListener("keydown", prevenirEspacios);
-        contraseña.addEventListener("change", eliminarEspacios);
 
+        // Evento que comprueba sesión en las páginas cacheadas y no cacheadas al querer interactuar con la aplicación.
+        window.addEventListener("click", function() {
+
+            var token6 = localStorage.getItem("token");
+            var formData6 = new FormData();
+            formData6.append("token", token6);
+            fetch("../php/verificar_sesion.php", {
+                method: "POST",
+                body: formData6
+            })
+            .then(response => response.json())
+            .then(resultado => {
+                if (resultado["status"] == "ERROR") {
+                    localStorage.removeItem("token");
+                    window.location.replace("login.html");
+                }
+            });
+
+        });
+
+        // Añado evento "submit" al formulario para que cuando se envie se ejecute lo que hay dentro de la función.
         const form = document.getElementById("form");
         form.addEventListener("submit", function (event) {
+
+            // Evito recarga
             event.preventDefault();
             let esValidoElFormulario = true;
 
+            // Verifico Sesión.
             var formData3 = new FormData();
             var token3 = localStorage.getItem("token");
             formData3.append("token", token3);
@@ -236,7 +238,6 @@
             .then(response => response.json())
             .then(resultado => {
                 if (resultado["status"] == "ERROR") {
-                    //alert("Sesion Caducada");
                     localStorage.removeItem("token");
                     window.location.replace("login.html");
                 } else {
@@ -288,17 +289,6 @@
                         document.getElementById("errorDni").innerHTML = "";
                     }
 
-                    /* VALIDO EL PASSWORD */
-                    var contraseña = (document.getElementById("contraseña").value).trim();
-                    var patron_contraseña = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
-
-                    if (patron_contraseña.test(contraseña) == false) {
-                        document.getElementById("errorContraseña").innerHTML = "La contraseña debe tener entre 8 y 15 caracteres, un número, una minúscula , una mayúscula, un caracter especial y no debe tener espacios en blanco";
-                        esValidoElFormulario = false;
-                    } else {
-                        document.getElementById("errorContraseña").innerHTML = "";
-                    }
-
                     // SI TODO ES CORRECTO MANDO LOS DATOS AL PHP y BD.
                     if (esValidoElFormulario) {
                         console.log("ENVIO LA INFO A PHP SQL Y MENSAJE DE ACTUALIZADO EL PERFIL OK");
@@ -308,7 +298,6 @@
                         formData4.append("nombre", nombre);
                         formData4.append("apellido", apellido);
                         formData4.append("dni", dni);
-                        formData4.append("contraseña", contraseña);
                         fetch("../php/actualizar_usuario.php", {
                             method: "POST",
                             body: formData4
@@ -316,6 +305,7 @@
                         .then(response => response.json())
                         .then(resultado => {
                             if (resultado["status"] == "OK") {
+                                // Muestro Modal.
                                 document.getElementById("contenidoModal").innerHTML = "Usuario Actualizado correctamente";
                                 var modal = document.getElementById("miModal");
                                 modal.style.display = "block";
@@ -328,8 +318,8 @@
                                         modal.style.display = "none";
                                     }
                                 }
-                                //alert("Usuario Actualizado correctamente");
                             } else {
+                                // Muestro Modal.
                                 document.getElementById("contenidoModal").innerHTML = "Error al modificar el Usuario";
                                 var modal = document.getElementById("miModal");
                                 modal.style.display = "block";
@@ -342,20 +332,44 @@
                                         modal.style.display = "none";
                                     }
                                 }
-                                //alert("Error al modificar el Usuario");
                             }
                         });
                     }
                 }
             });
+
         });
 
-        function cerrar_sesion() {
+        // Añadir evento "click "al elemento HTML cuyo id es "elemento_cerrar_sesion". Una vez se hace click, se ejecuta la función que modifica el estado de la sesión en la BD
+        // de 0(Sesión Activa) a 1 (Sesión Caducada). Además se elimina el token del localStorage y se redirige a la pagina del Login.
+        var elemento_cerrar_sesion = document.getElementById("elemento_cerrar_sesion");
+        elemento_cerrar_sesion.addEventListener("click", function (event) {
+
+            var token5 = localStorage.getItem("token");
+            var formData5 = new FormData();
+            formData5.append("token", token5);
+            fetch("../php/cerrar_sesion.php", {
+                method: "POST",
+                body: formData5
+            });
             localStorage.removeItem("token");
             window.location.replace("login.html");
-        };
+
+        });
+
+        // Función para evitar espacios.
+        function prevenirEspacios(event) {
+            if (event.key == ' ') {
+                event.preventDefault();
+            }
+        }
+
+        // Función para evitar espacios.
+        function eliminarEspacios(event) {
+            event.target.value = event.target.value.replace(/\s/g, '');
+        }
 
     </script>
-    <script src="../assets/añadir_tarjeta/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/perfil/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

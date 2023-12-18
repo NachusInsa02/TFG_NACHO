@@ -1,14 +1,63 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Registrarse</title>
     <link rel="stylesheet" href="../assets/registrarse/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/registrarse/css/Login-Form-Basic-icons.css">
-</head>
+    <style>
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 140%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation-name: animarEntrada;
+            animation-duration: 0.4s;
+        }
+
+        .modal-contenido {
+            background-color: #fefefe;
+            margin: 75px auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        @keyframes animarEntrada {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        .cerrar {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .cerrar:hover,
+        .cerrar:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
 <body>
     <section class="position-relative py-4 py-xl-5">
         <div class="container">
@@ -51,22 +100,20 @@
             </div>
         </div>
     </section>
+    <div id="miModal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <p id="contenidoModal"></p>
+        </div>
+    </div>
     <script>
 
+        // Si existe el token redirecciono a el panel de mis tarjetas.
         if (localStorage.getItem("token")){
             window.location.replace("mis_tarjetas.html");
-        } 
-
-        function prevenirEspacios(event) {
-            if(event.key == ' '){
-                event.preventDefault();
-            }
         }
 
-        function eliminarEspacios(event) {
-            event.target.value = event.target.value.replace(/\s/g, '');
-        }
-
+        // Añadir eventos a cada uno de los elementos HTML.
         const nombre = document.getElementById("nombre");
         nombre.addEventListener("keydown", prevenirEspacios);
         nombre.addEventListener("change", eliminarEspacios);
@@ -83,8 +130,11 @@
         contraseña.addEventListener("keydown", prevenirEspacios);
         contraseña.addEventListener("change", eliminarEspacios);
 
+        // Añado evento "submit" al formulario para que cuando se envie se ejecute lo que hay dentro de la función.
         const form = document.getElementById("formulario_registrarse");
         form.addEventListener("submit", function(event){
+            
+            // Evito recarga.
             event.preventDefault();
             let esValidoElFormulario = true;
             
@@ -156,8 +206,8 @@
                 document.getElementById("errorContraseña").innerHTML = "";
             }
 
+            // Si todo es correcto interactuo con la api de PHP.
             if(esValidoElFormulario){
-                console.log("ENVIO LA INFO A PHP SQL Y MENSAJE DE ACTUALIZADO EL PERFIL OK");  
                 var formData = new FormData();
                 formData.append("nombre",nombre);
                 formData.append("apellidos",apellidos);
@@ -171,13 +221,51 @@
                 .then(response => response.json())
                 .then (resultado => {
                     if (resultado["status"] == "ERROR"){
-                        alert("Ya existe un usuario con ese email");
+                        // Muestro Modal.
+                        document.getElementById("contenidoModal").innerHTML = "Ya existe un usuario con ese email";
+                        var modal = document.getElementById("miModal");
+                        modal.style.display = "block";
+                        var btnCerrar = document.getElementsByClassName("cerrar")[0];
+                        btnCerrar.onclick = function () {
+                            modal.style.display = "none";
+                        }
+                        window.onclick = function (event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        }
                     }else{
-                        alert("Usuario registrado correctamente");
+                        // Muestro modal.
+                        document.getElementById("contenidoModal").innerHTML = "Usuario registrado correctamente";
+                        var modal = document.getElementById("miModal");
+                        modal.style.display = "block";
+                        var btnCerrar = document.getElementsByClassName("cerrar")[0];
+                        btnCerrar.onclick = function () {
+                            modal.style.display = "none";
+                        }
+                        window.onclick = function (event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        }
                     }
                 })
             }
+
         });
+
+        // Función para evitar espacios.
+        function prevenirEspacios(event) {
+            if(event.key == ' '){
+                event.preventDefault();
+            }
+        }
+
+        // Funcion para evitar espacios.
+        function eliminarEspacios(event) {
+            event.target.value = event.target.value.replace(/\s/g, '');
+        }
+
     </script>
     <script src="../assets/registrarse/bootstrap/js/bootstrap.min.js"></script>
 </body>

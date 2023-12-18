@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Añadir Tarjeta</title>
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="../assets/añadir_tarjeta/css/styles.css">
+    <title>Movimientos</title>
+    <link rel="stylesheet" href="../assets/movimientos/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/movimientos/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/movimientos/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="../assets/movimientos/css/styles.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-
     <style>
+
         .positivo {
             color: green !important;
         }
@@ -20,10 +18,34 @@
         .negativo {
             color: red !important;
         }
+
+        #titulo {
+            top: 2.5% !important;
+        }
+
+        /* Estilos para pantallas menores de 600px */
+        @media only screen and (max-width: 599px) {
+            #titulo {
+            top: 4.5% !important;
+        }
+        }
+
+        /* Estilos para pantallas entre 600px y 900px */
+        @media only screen and (min-width: 600px) and (max-width: 899px) {
+            #titulo {
+                top: 3% !important;
+            }
+        }
+
+        /* Estilos para pantallas mayores de 900px */
+        @media only screen and (min-width: 900px) {
+            #titulo {
+                top: 3.5% !important;
+            }
+        }
+
     </style>
-
 </head>
-
 <body style="min-height: 100vh;">
     <!-- CONTENEDOR -->
     <div style="width: 100%; display: flex; min-width: 375px; min-height: 100vh;">
@@ -32,12 +54,12 @@
             <!-- MENU LATERAL -->
             <div class="bg-body shadow d-flex flex-column flex-shrink-0 top-0 bottom-0"
                 style="width: 4.5rem; min-height: 100%;"><a
-                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="/"
+                    class="text-center link-body-emphasis d-block p-3 text-decoration-none border-bottom" href="#"
                     title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only"><i
                         class="fa fa-money" style="font-size: 25px;"></i><span
                         class="visually-hidden">Icon-only</span></a>
                 <ul class="nav nav-pills flex-column text-center nav-flush mb-auto">
-                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="#"
+                    <li class="nav-item"><a class="nav-link active link-light py-3 border-bottom rounded-0" href="mis_tarjetas.html"
                             aria-current="page"><i class="icon-credit-card"></i></a></li>
                     <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="añadirTarjeta.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
@@ -46,7 +68,7 @@
                                     d="M12 4C11.4477 4 11 4.44772 11 5V11H5C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H11V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13H19C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11H13V5C13 4.44772 12.5523 4 12 4Z"
                                     fill="currentColor"></path>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="movimientos.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-credit-card">
                                 <path
@@ -55,7 +77,7 @@
                                 <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z">
                                 </path>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="#"><svg
+                    <li class="nav-item"><a class="nav-link py-3 border-bottom rounded-0" href="contratos.html"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                 fill="none">
                                 <path d="M7 18H17V16H7V18Z" fill="currentColor"></path>
@@ -72,16 +94,16 @@
                             width="32" height="32" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"
                             style="object-fit: cover;"></a>
                     <div class="dropdown-menu shadow text-small" data-popper-placement="top-start"><a
-                            class="dropdown-item" href="#">Perfil</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"
-                            onclick="cerrar_sesion()">Cerrar Sesión</a>
+                            class="dropdown-item" href="perfil.html">Perfil</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" id="elemento_cerrar_sesion"
+                            href="#">Cerrar Sesión</a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- DIV DE LA DERECHA -->
         <div style="flex-grow: 1; position: relative;">
-            <h1
+            <h1 id="titulo"
                 style="position: absolute; top: 3%; left: 50%; transform: translate(-50%, -50%); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 3px;">
                 Movimientos</h1>
             <div>
@@ -90,7 +112,7 @@
                     <div style="max-width: 90%; margin: 120px auto 0 auto; ">
                         <label for="tarjeta" class="form-label"> Selecciona la tarjeta:</label>
                         <select class="form-select" name="tarjeta" id="tarjeta">
-                           <!--  <option value="null">-------</option> -->
+                            <!--  <option value="null">-------</option> -->
                             <!-- <option value="tarjeta1">xxxx xxxx xxxx 0215</option>
                             <option value="tarjeta1">xxxx xxxx xxxx 0999</option>
                             <option value="tarjeta1">xxxx xxxx xxxx 1232</option>
@@ -110,7 +132,7 @@
                             <th>Fecha</th>
                             <th>Descripción</th>
                             <th>Transacción</th>
-                            <th>Saldo</th>
+                            <th>Cantidad</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,63 +143,7 @@
     </div>
     <script>
 
-        document.getElementById("tarjeta").addEventListener("change", function (e) {
-
-            let select = document.getElementById("tarjeta");
-            let value = select.value;
-
-            if(value != "null"){
-                let valueText = select.options[select.selectedIndex].text;
-                document.getElementById("detalleDe").innerText = "Detalle de la tarjeta: " +  valueText;
-            } else {
-                document.getElementById("detalleDe").innerText = "";
-            }
-    
-            //console.log(e.target.value);
-
-            var formData3 = new FormData();
-            var token3 = localStorage.getItem("token");
-            formData3.append("token", token3);
-            formData3.append("id_tarjeta",e.target.value);
-            fetch("../php/mostrar_movimientos.php", {
-            method: "POST",
-            body: formData3
-            })
-            .then(response => response.json())
-            .then(resultado => {
-                console.log(resultado);  
-                
-                let table = document.querySelector(".table");
-                let tbody = table.querySelector("tbody");
-
-                tbody.innerHTML = "";
-
-                resultado.forEach(function(item){
-
-                    console.log(item)
-                    let row = document.createElement("tr");
-                   
-                    let fecha = document.createElement("td");
-                    fecha.textContent = item.fecha;
-                    row.appendChild(fecha);
-
-                    let descripcion = document.createElement("td");
-                    descripcion.textContent = item.descripcion;
-                    row.appendChild(descripcion);
-
-                    let transaccion = document.createElement("td");
-                    transaccion.textContent = item.transaccion;
-                    row.appendChild(transaccion);
-
-                    let importe = document.createElement("td");
-                    importe.textContent = item.importe;
-                    row.appendChild(importe);
-                    tbody.appendChild(row);
-
-                })
-            })
-        });
-
+        // Verifico si la sesión está activa. Si lo está me quedo en la página, sino se te echa de la aplicación para que puedas volver a iniciar sesión.
         var formData1 = new FormData();
         var token1 = localStorage.getItem("token");
         formData1.append("token", token1);
@@ -185,50 +151,141 @@
             method: "POST",
             body: formData1
         })
+        .then(response => response.json())
+        .then(resultado => {
+            if (resultado["status"] == "ERROR") {
+                localStorage.removeItem("token");
+                window.location.replace("login.html");
+            } else {
+                var formData2 = new FormData();
+                var token2 = localStorage.getItem("token");
+                formData2.append("token", token2);
+                fetch("../php/tarjetas_movimientos.php", {
+                    method: "POST",
+                    body: formData2
+                })
+                .then(response => response.json())
+                .then(resultado => {
+                    document.getElementById("tarjeta").innerHTML = `<option value="null">------</option> `;
+                    const opciones = resultado.map(tarjeta => {
+                        return `<option value="${tarjeta.id}">${tarjeta.numero_tarjeta_formateada}</option>`;
+                    }).join("");
+                    document.getElementById("tarjeta").innerHTML += opciones;
+                    console.log(resultado);
+                });
+            }
+        });
+
+        // Evento que comprueba sesión en las páginas cacheadas y no cacheadas al querer interactuar con la aplicación.
+        window.addEventListener("click", function() {
+
+            var token6 = localStorage.getItem("token");
+            var formData6 = new FormData();
+            formData6.append("token", token6);
+            fetch("../php/verificar_sesion.php", {
+                method: "POST",
+                body: formData6
+            })
             .then(response => response.json())
             .then(resultado => {
                 if (resultado["status"] == "ERROR") {
-                    //alert("Sesion Caducada");
+                    localStorage.removeItem("token");
+                    window.location.replace("login.html");
+                }
+            });
+            
+        });
+
+        // Evento que se ejecuta cuando cambia el valor del elemento HTML al que hace referencia. Ejecuta la función descrita.
+        document.getElementById("tarjeta").addEventListener("change", function (e) {
+
+            // Verifico la sesión.
+            var token5 = localStorage.getItem("token");
+            var formData5 = new FormData();
+            formData5.append("token", token5);
+            fetch("../php/verificar_sesion.php", {
+                method: "POST",
+                body: formData5
+            })
+            .then(response => response.json())
+            .then(resultado => {
+                if (resultado["status"] == "ERROR") {
                     localStorage.removeItem("token");
                     window.location.replace("login.html");
                 } else {
-                    var formData2 = new FormData();
-                    var token2 = localStorage.getItem("token");
-                    formData2.append("token", token2);
-                    fetch("../php/tarjetas_movimientos.php", {
-                        method: "POST",
-                        body: formData2
-                    })
-                        .then(response => response.json())
-                        .then(resultado => {
+                    let select = document.getElementById("tarjeta");
+                    let value = select.value;
 
-                            document.getElementById("tarjeta").innerHTML =  `<option value="null">------</option> ` ;
-                            
-                            const opciones = resultado.map( tarjeta => {
-                                //const tarjetaOculta = ocultarDigitos(tarjeta);
-                                return `<option value="${tarjeta.id}">${tarjeta.numero_tarjeta_formateada}</option>`;
-                            }).join("");
-                            document.getElementById("tarjeta").innerHTML += opciones;
-                            console.log(resultado);
-                        });
+                    if (value != "null") {
+                        let valueText = select.options[select.selectedIndex].text;
+                        document.getElementById("detalleDe").innerText = "Detalle de la tarjeta: " + valueText;
+                    } else {
+                        document.getElementById("detalleDe").innerText = "";
+                    }
+
+                    // Se conecta con la API de PHP y se muestran los movimientos en su correspondiente tabla.
+                    var formData3 = new FormData();
+                    var token3 = localStorage.getItem("token");
+                    formData3.append("token", token3);
+                    formData3.append("id_tarjeta", e.target.value);
+                    fetch("../php/mostrar_movimientos.php", {
+                        method: "POST",
+                        body: formData3
+                    })
+                    .then(response => response.json())
+                    .then(resultado => {
+                        console.log(resultado);
+
+                        let table = document.querySelector(".table");
+                        let tbody = table.querySelector("tbody");
+
+                        tbody.innerHTML = "";
+
+                        resultado.forEach(function (item) {
+                            console.log(item)
+                            let row = document.createElement("tr");
+
+                            let fecha = document.createElement("td");
+                            fecha.textContent = item.fecha;
+                            row.appendChild(fecha);
+
+                            let descripcion = document.createElement("td");
+                            descripcion.textContent = item.descripcion;
+                            row.appendChild(descripcion);
+
+                            let transaccion = document.createElement("td");
+                            transaccion.textContent = item.transaccion;
+                            row.appendChild(transaccion);
+
+                            let importe = document.createElement("td");
+                            importe.textContent = item.importe;
+                            row.appendChild(importe);
+                            tbody.appendChild(row);
+                        })
+                    })
                 }
             });
 
+        });
 
-        
+        // Añadir evento "click "al elemento HTML cuyo id es "elemento_cerrar_sesion". Una vez se hace click, se ejecuta la función que modifica el estado de la sesión en la BD
+        // de 0(Sesión Activa) a 1 (Sesión Caducada). Además se elimina el token del localStorage y se redirige a la pagina del Login.
+        var elemento_cerrar_sesion = document.getElementById("elemento_cerrar_sesion");
+        elemento_cerrar_sesion.addEventListener("click", function (event) {
 
-        function cerrar_sesion() {
+            var token4 = localStorage.getItem("token");
+            var formData4 = new FormData();
+            formData4.append("token", token4);
+            fetch("../php/cerrar_sesion.php", {
+                method: "POST",
+                body: formData4
+            });
             localStorage.removeItem("token");
             window.location.replace("login.html");
-        }
-
-
-        const ocultarDigitos = (numero) => {
-             return numero.substring(0, numero.length -4).replace(/\d/g, "X") + numero.slice(-4);                  
-        }
+            
+        });
 
     </script>
-    <script src="../assets/añadir_tarjeta/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/movimientos/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>
